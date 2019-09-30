@@ -1,6 +1,6 @@
 <?php
 require_once("db.php");
-#require_once("includes/check_session.php")
+require_once("includes/check_session.php")
 ?>
 
 <!DOCTYPE html>

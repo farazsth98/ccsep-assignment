@@ -2,7 +2,7 @@
 	session_start();
 	if (!isset($_SESSION['id']))
 	{
-	  header("Location: /login.php?next=index.php");
+	  header("Location: /login.php");
 	  die();
 	}
 ?>

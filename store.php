@@ -7,7 +7,10 @@ require_once("includes/check_session.php")
 <html>
 <head>
 
-	<?php include_once("includes/includes.php"); ?>
+	<?php
+	include_once("includes/includes.php");
+	$current = "store.php";
+	?>
 
 </head>
 <body>

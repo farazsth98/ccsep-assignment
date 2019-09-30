@@ -1,6 +1,6 @@
 <?php
 require_once("db.php");
-#require_once("includes/check_session.php")
+require_once("includes/check_session.php")
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +9,7 @@ require_once("db.php");
 
 	<?php
 	include_once("includes/includes.php");
-	$current = "account.php";
+	$current = "user_items.php";
 	?>
 
 </head>
