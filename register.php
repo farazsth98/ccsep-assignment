@@ -1,3 +1,7 @@
+<?php
+  include("includes/handle_register.php");
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -15,28 +19,32 @@
 						</div>
 						<div class="card-body">
 							<h5 class="card-title text-center">Register</h5>
-							<form class="form-signin" method="POST">
+							<form class="form-signin" action="" method="POST">
 								<div class="form-label-group">
-									<input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
+									<input type="text" id="inputUserame" class="form-control" placeholder="Username" name="username" required autofocus>
 									<label for="inputUserame">Username</label>
 								</div>
 
 								<div class="form-label-group">
-									<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
+									<input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required>
 									<label for="inputEmail">Email address</label>
 								</div>
 
 								<div class="form-label-group">
-									<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+									<input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
 									<label for="inputPassword">Password</label>
 								</div>
 
 								<div class="form-label-group">
-									<input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+									<input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" name="confirmpassword" required>
 									<label for="inputConfirmPassword">Confirm password</label>
 								</div>
 
-								<button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+								<div class="form-label-group text-danger text-center">
+									<?php echo $error; ?>
+								</div>
+
+								<button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" value="register" type="submit">Register</button>
 								<hr>
 								<p class="d-block text-center">Already have an account? <a href="/login.php">Sign In</a></p>
 							</form>

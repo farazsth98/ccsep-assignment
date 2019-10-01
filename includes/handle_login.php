@@ -3,7 +3,7 @@
 
   session_start();
 
-	if(isset($_SESSION["logged_in"]))
+	if(isset($_SESSION["id"]))
 	{
 		header("Location: /index.php");
 	}
@@ -18,34 +18,34 @@
 		}
 		else
 		{
-			$username = $_POST["username"];
-			$password = $_POST["password"];
+			$username = urldecode($_POST["username"]);
+			$password = urldecode($_POST["password"]);
 
-			$stmt = "SELECT * FROM Users WHERE username='$username';";
+			// PreparedStatements used so no SQL injection here
+			$stmt = mysqli_prepare($db,"SELECT id, username, password FROM Users WHERE username=?");
+			mysqli_stmt_bind_param($stmt, "s", $username);
+			mysqli_stmt_execute($stmt);
 
-			$rows = mysqli_query($db, $stmt);
-			$num_rows = mysqli_num_rows($rows);
+			// Fetch the results
+			mysqli_stmt_bind_result($stmt, $db_id, $db_username, $db_password);
+			mysqli_stmt_fetch($stmt);
 
-			if (!$rows)
+			// Get the number of rows returned
+			mysqli_stmt_store_result($stmt);
+			$num_rows = mysqli_stmt_num_rows($stmt);
+
+			// Make sure the username and password returned by the db aren't empty
+			if (empty($db_username) || empty($db_password))
 			{
 				$error = "Invalid username or password";
 			}
 			else
 			{
-				if ($num_rows == 1)
+				// Compare passwords and create session if successful
+				if (md5($password) == $db_password)
 				{
-					$row = mysqli_fetch_assoc($rows);
-
-					if (md5($password) == $row['password'])
-					{
-						$_SESSION["id"] = $row["id"];
-						$_SESSION["logged_in"] = "true";
-						header("Location: /index.php");
-					}
-					else
-					{
-						$error = "Invalid username or password";
-					}
+					$_SESSION["id"] = $db_id;
+					header("Location: /index.php");
 				}
 				else
 				{

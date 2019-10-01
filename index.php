@@ -11,12 +11,13 @@ require_once("includes/check_session.php")
 
 </head>
 <body>
-   <?php
-      include_once('includes/header.php');
-   ?>
+	<?php
+		session_start();
+    include_once('includes/header.php');
+	?>
 
-   <div class="container">
+  <div class="container">
 
-   </div>
+  </div>
 </body>
 </html>
