@@ -14,7 +14,7 @@
 	{
 		if (empty($_POST["username"]) || empty($_POST["password"]))
 		{
-			$error = "Invalid username or password";
+			$error = "Invalid username or password.";
 		}
 		else
 		{
@@ -22,12 +22,12 @@
 			$password = urldecode($_POST["password"]);
 
 			// PreparedStatements used so no SQL injection here
-			$stmt = mysqli_prepare($db,"SELECT id, username, password FROM Users WHERE username=?");
+			$stmt = mysqli_prepare($db,"SELECT id, username, password, locked FROM Users WHERE username=?");
 			mysqli_stmt_bind_param($stmt, "s", $username);
 			mysqli_stmt_execute($stmt);
 
 			// Fetch the results
-			mysqli_stmt_bind_result($stmt, $db_id, $db_username, $db_password);
+			mysqli_stmt_bind_result($stmt, $db_id, $db_username, $db_password, $db_locked);
 			mysqli_stmt_fetch($stmt);
 
 			// Get the number of rows returned
@@ -37,19 +37,27 @@
 			// Make sure the username and password returned by the db aren't empty
 			if (empty($db_username) || empty($db_password))
 			{
-				$error = "Invalid username or password";
+				$error = "Invalid username or password.";
 			}
 			else
 			{
-				// Compare passwords and create session if successful
+				// Compare passwords
 				if (md5($password) == $db_password)
 				{
-					$_SESSION["id"] = $db_id;
-					header("Location: /index.php");
+					// Check if the account is locked
+				  if ($db_locked == "false")
+					{
+						$_SESSION["id"] = $db_id;
+						header("Location: /index.php");
+					}
+					else
+					{
+						$error = "Account is locked. Please contact an administrator.";
+					}
 				}
 				else
 				{
-					$error = "Invalid username or password";
+					$error = "Invalid username or password.";
 				}
 			}
 		}
