@@ -12,7 +12,7 @@
 
 	if (isset($_POST["submit"]))
 	{
-		$username = $_POST["username"];
+		$username = urldecode($_POST["username"]);
 		$email = urldecode($_POST["email"]);
 		$password = md5($_POST["password"]);
 		$confirmpassword = md5($_POST["confirmpassword"]);

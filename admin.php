@@ -32,7 +32,8 @@ if (!isset($_SESSION['id']))
 	?>
 
 	<div class="container">
-		 <h1>Search Test:</h1>
+		 <!-- Mad props to Jon for providing a table for us to use ^_^ -->
+		 <h1>Search for users:</h1>
 		 <!-- Send the form as a GET request to this page (look at the URL) -->
 		 <form method="GET" action="./admin.php">
 				<div class="input-group mt-2 w-25">
@@ -57,15 +58,19 @@ if (!isset($_SESSION['id']))
 					 <th>Locked?</th>
 					 <th>Lock</th>
 					 <th>Unlock</th>
+					 <th>Delete Account</th>
 				</thead>
 				<tbody>
 					 <?php
 
 							// If the GET variable "name" is set then use it
-							if(isset($_GET["name"])){
+							if(isset($_GET["name"]))
+							{
 								 $name = $_GET["name"];
 								 $sql = "SELECT id, username, email, locked FROM Users where username LIKE '%$name%'";
-							}else{
+							}
+							else
+							{
 								 // Otherwise just grab them all
 								 $sql = "SELECT id, username, email, locked FROM Users";
 							}
@@ -75,10 +80,10 @@ if (!isset($_SESSION['id']))
 
 							$row_index = 1;
 							// Iterate through all results and create a list item
-							while($row = mysqli_fetch_array($result)){
-
+							while($row = mysqli_fetch_array($result))
+							{
 								 echo "<tr>";
-								 echo "<td>$row[1]</td>";
+								 echo "<td>$row[0]</td>";
 								 echo "<td>$row[1]</td>";
 								 echo "<td>$row[2]</td>";
 								 echo "<td>$row[3]</td>";
@@ -93,6 +98,12 @@ if (!isset($_SESSION['id']))
 								 		echo'<form action="" method="post">';
 											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
 									 		echo '<button name="unlock" type="submit" value="unlock" class="btn btn-success"><i class="fas fa-check"></button></i>';
+								 		echo'</form>';
+								 echo "</td>";
+								 echo "<td>";
+								 		echo'<form action="" method="post">';
+											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
+									 		echo '<button name="delete" type="submit" value="delete" class="btn btn-danger"><i class="fas fa-times"></button></i>';
 								 		echo'</form>';
 								 echo "</td>";
 								 echo "</tr>";
