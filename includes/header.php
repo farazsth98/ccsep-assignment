@@ -1,3 +1,7 @@
+
+<!-- This navigation bar has been adapted from the bootstrap documentation found here:
+     https://getbootstrap.com/docs/4.0/components/navbar/ -->
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/index.php">House of Faith</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +22,13 @@
       <li class="nav-item">
         <a class="nav-link" href="/logout.php">Logout</a>
       </li>
+      <?php
+        if ($_SESSION["id"] == 1) echo '
+        <li class="nav-item">
+          <a class="nav-link" href="/admin.php">Admin Panel</a>
+        </li>
+        '
+      ?>
     </ul>
     <?php if($current == "store.php") echo '
     <form class="form-inline my-2 my-lg-0">

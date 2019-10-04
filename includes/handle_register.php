@@ -34,6 +34,7 @@
 			mysqli_stmt_store_result($stmt);
 
 			$num_rows = mysqli_stmt_num_rows($stmt);
+			mysqli_stmt_close($stmt);
 
 			if ($num_rows == 0)
 			{
@@ -44,6 +45,7 @@
 				mysqli_stmt_store_result($stmt);
 
 				$num_rows = mysqli_stmt_num_rows($stmt);
+				mysqli_stmt_close($stmt);
 
 				if ($num_rows == 0)
 				{
@@ -53,21 +55,18 @@
 					mysqli_stmt_execute($stmt);
 					mysqli_stmt_bind_result($stmt, $db_id);
 					mysqli_stmt_fetch($stmt);
+					mysqli_stmt_close($stmt);
 
 					// Add one to it to get a new ID
 					$db_id += 1;
 
 					// Insert this new user as a row in the Users table
-					$stmt = mysqli_prepare($db, "INSERT INTO Users (id, username, password, email, locked) VALUES (?, ?, ?, ?, 'false');");
-					mysqli_stmt_bind_param($stmt, "isss", $in_id, $in_username, $in_password, $in_email);
-
-					$in_id = $db_id;
-					$in_username = $username;
-					$in_password = $password;
-					$in_email = $email;
+					$stmt = mysqli_prepare($db, "INSERT INTO Users (id, username, password, email, locked) VALUES (?, ?, ?, ?, 'false')");
+					mysqli_stmt_bind_param($stmt, "isss", $db_id, $username, $password, $email);
 					mysqli_stmt_execute($stmt);
+					mysqli_stmt_close($stmt);
 
-					echo mysqli_stmt_affected_rows($stmt);
+					header("Location: /login.php");
 				}
 				else
 				{
