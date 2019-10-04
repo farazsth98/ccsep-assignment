@@ -1,6 +1,14 @@
 <?php
 require_once("db.php");
-require_once("includes/check_session.php")
+require_once("includes/check_session.php");
+include("includes/handle_admin.php");
+
+session_start();
+if (!isset($_SESSION['id']))
+{
+	header("Location: /login.php");
+	die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +22,10 @@ require_once("includes/check_session.php")
 	<?php
 		// If the current user is not an admin, abort
 		if ($_SESSION["id"] != 1)
+		{
 			header("Location: /index.php");
+			die();
+		}
 
 		session_start();
     include_once('includes/header.php');
@@ -62,24 +73,31 @@ require_once("includes/check_session.php")
 							$result = mysqli_query($db, $sql);
 							echo mysqli_error($db);
 
+							$row_index = 1;
 							// Iterate through all results and create a list item
 							while($row = mysqli_fetch_array($result)){
 
 								 echo "<tr>";
-								 // Access by name
-								 echo "<td>".$row['id']."</td>";
-								 // Access by index
+								 echo "<td>$row[1]</td>";
 								 echo "<td>$row[1]</td>";
 								 echo "<td>$row[2]</td>";
 								 echo "<td>$row[3]</td>";
-								 // Add a button that sends the ID of the user to the delete function
+								 // Add two buttons that act as lock and unlock buttons for each account
 								 echo "<td>";
-										echo "<button class='btn btn-danger' onclick='lockPerson(".$row["id"].")'><i class='fas fa-times'></button></i>";
+								 		echo'<form action="" method="post">';
+											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
+											echo '<button name="lock" type="submit" value="lock" class="btn btn-danger"><i class="fas fa-times"></button></i>';
+										echo '</form>';
 								 echo "</td>";
 								 echo "<td>";
-								 		echo "<button class='btn btn-success' onclick='unlockPerson(".$row["id"].")'><i class='fas fa-check'></button></i>";
+								 		echo'<form action="" method="post">';
+											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
+									 		echo '<button name="unlock" type="submit" value="unlock" class="btn btn-success"><i class="fas fa-check"></button></i>';
+								 		echo'</form>';
 								 echo "</td>";
 								 echo "</tr>";
+
+								 $row_index += 1;
 							}
 					 ?>
 				</tbody>
