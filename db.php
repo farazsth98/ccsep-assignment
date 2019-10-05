@@ -11,6 +11,9 @@
 */
 
 // Set constants for the database connection
+
+include("/includes/check_session.php");
+
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'student');
 define('DB_PASSWORD', 'CCSEP2019');

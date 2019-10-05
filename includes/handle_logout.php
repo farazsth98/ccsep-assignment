@@ -3,5 +3,5 @@
 	unset($_SESSION['id']);
 	session_destroy();
 
-	header("Location: /login.php");
+	header("Location: /auth.php?page=login.php");
 ?>

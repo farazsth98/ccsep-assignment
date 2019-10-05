@@ -4,11 +4,6 @@ require_once("includes/check_session.php");
 include("includes/handle_admin.php");
 
 session_start();
-if (!isset($_SESSION['id']))
-{
-	header("Location: /login.php");
-	die();
-}
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +62,7 @@ if (!isset($_SESSION['id']))
 							if(isset($_GET["name"]))
 							{
 								 $name = $_GET["name"];
-								 $sql = "SELECT id, username, email, locked FROM Users where username LIKE '%$name%'";
+								 $sql = "SELECT id, username, email, locked FROM Users where username='$name'";
 							}
 							else
 							{
@@ -78,7 +73,6 @@ if (!isset($_SESSION['id']))
 							$result = mysqli_query($db, $sql);
 							echo mysqli_error($db);
 
-							$row_index = 1;
 							// Iterate through all results and create a list item
 							while($row = mysqli_fetch_array($result))
 							{
@@ -90,25 +84,23 @@ if (!isset($_SESSION['id']))
 								 // Add two buttons that act as lock and unlock buttons for each account
 								 echo "<td>";
 								 		echo'<form action="" method="post">';
-											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
+											echo '<input type="hidden" name="id" value="'.$row[0].'"/>';
 											echo '<button name="lock" type="submit" value="lock" class="btn btn-danger"><i class="fas fa-times"></button></i>';
 										echo '</form>';
 								 echo "</td>";
 								 echo "<td>";
 								 		echo'<form action="" method="post">';
-											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
+											echo '<input type="hidden" name="id" value="'.$row[0].'"/>';
 									 		echo '<button name="unlock" type="submit" value="unlock" class="btn btn-success"><i class="fas fa-check"></button></i>';
 								 		echo'</form>';
 								 echo "</td>";
 								 echo "<td>";
 								 		echo'<form action="" method="post">';
-											echo '<input type="hidden" name="id" value="'.$row_index.'"/>';
+											echo '<input type="hidden" name="id" value="'.$row[0].'"/>';
 									 		echo '<button name="delete" type="submit" value="delete" class="btn btn-danger"><i class="fas fa-times"></button></i>';
 								 		echo'</form>';
 								 echo "</td>";
 								 echo "</tr>";
-
-								 $row_index += 1;
 							}
 					 ?>
 				</tbody>
