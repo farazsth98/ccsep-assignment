@@ -14,7 +14,7 @@
         <a class="nav-link" href="/account.php">Account</a>
       </li>
 			<li class="nav-item <?php if($current == "user_items.php") echo "active"; ?> ">
-        <a class="nav-link" href="/user_items.php">Your items</a>
+        <a class="nav-link" href="/your_items.php">Your items</a>
       </li>
 			<li class="nav-item <?php if($current == "store.php") echo "active"; ?> ">
         <a class="nav-link" href="/store.php">Store</a>
@@ -30,11 +30,5 @@
         '
       ?>
     </ul>
-    <?php if($current == "store.php") echo '
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" item="item">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    '?>
   </div>
 </nav>

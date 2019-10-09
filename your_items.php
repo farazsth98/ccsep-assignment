@@ -9,7 +9,7 @@ require_once("includes/check_session.php")
 
 	<?php
 	include_once("includes/includes.php");
-	$current = "store.php";
+	$current = "user_items.php";
 	?>
 
 </head>
@@ -39,44 +39,38 @@ require_once("includes/check_session.php")
 		 <table class="table">
 				<!-- THIS IS THE TABLE HEADER (YES IT GETS BOLDED) -->
 				<thead>
-					 <th>Seller</th>
 					 <th>Item name</th>
 					 <th>Description</th>
 					 <th>Price</th>
 				</thead>
 				<tbody>
-				 <?php
-				 		$current_id = $_SESSION["id"];
+					 <?php
+					 		$current_id = $_SESSION["id"];
 
-						// If the GET variable "name" is set then use it
-						if(isset($_GET["name"]))
-						{
-							 $name = $_GET["name"];
-							 $sql = "SELECT user_id, name, description, price FROM Items where name LIKE '%$name%'";
-						}
-						else
-						{
-							 // Otherwise just grab them all
-							 $sql = "SELECT user_id, name, description, price FROM Items";
-						}
-						$result = mysqli_query($db, $sql);
+							// If the GET variable "name" is set then use it
+							if(isset($_GET["name"]))
+							{
+								 $name = $_GET["name"];
+								 $sql = "SELECT name, description, price FROM Items where user_id=$current_id AND name LIKE '%$name%'";
+							}
+							else
+							{
+								 // Otherwise just grab them all
+								 $sql = "SELECT name, description, price FROM Items WHERE user_id=$current_id;";
+							}
+							$result = mysqli_query($db, $sql);
 
-						// Iterate through all results and create a list item
-						while($row = mysqli_fetch_array($result))
-						{
-							 // Get the owner of each item
-							 $sql = "SELECT username FROM Users WHERE id=$row[0]";
-							 $owner = mysqli_fetch_array(mysqli_query($db, $sql))[0];
-
-							 echo "<tr>";
-							 echo "<td>$owner</td>";
-							 echo "<td>$row[1]</td>";
-							 echo "<td>$row[2]</td>";
-							 echo "<td>$row[3]</td>";
-						}
-				 ?>
-			 </tbody>
+							// Iterate through all results and create a list item
+							while($row = mysqli_fetch_array($result))
+							{
+								 echo "<tr>";
+								 echo "<td>$row[0]</td>";
+								 echo "<td>$row[1]</td>";
+								 echo "<td>$row[2]</td>";
+							}
+					 ?>
+				</tbody>
 		 </table>
-		</div>
+   </div>
 </body>
 </html>

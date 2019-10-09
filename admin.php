@@ -71,7 +71,6 @@ session_start();
 							}
 
 							$result = mysqli_query($db, $sql);
-							echo mysqli_error($db);
 
 							// Iterate through all results and create a list item
 							while($row = mysqli_fetch_array($result))

@@ -1,5 +1,8 @@
 <?php
   include("includes/handle_register.php");
+
+  if ($_SERVER["REQUEST_URI"] != "/auth.php?page=register.php")
+    header("Location: /auth.php?page=register.php");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +49,7 @@
 
 								<button class="btn btn-lg btn-primary btn-block text-uppercase" name="submit" value="register" type="submit">Register</button>
 								<hr>
-								<p class="d-block text-center">Already have an account? <a href="/login.php">Sign In</a></p>
+								<p class="d-block text-center">Already have an account? <a href="/auth.php?page=login.php">Sign In</a></p>
 							</form>
 						</div>
 					</div>

@@ -61,7 +61,7 @@
 					$db_id += 1;
 
 					// Insert this new user as a row in the Users table
-					$stmt = mysqli_prepare($db, "INSERT INTO Users (id, username, password, email, locked) VALUES (?, ?, ?, ?, 'false')");
+					$stmt = mysqli_prepare($db, "INSERT INTO Users (id, username, password, email, locked, balance) VALUES (?, ?, ?, ?, 'false', 0.0)");
 					mysqli_stmt_bind_param($stmt, "isss", $db_id, $username, $password, $email);
 					mysqli_stmt_execute($stmt);
 					mysqli_stmt_close($stmt);

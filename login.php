@@ -1,5 +1,8 @@
 <?php
   include("includes/handle_login.php");
+
+  if ($_SERVER["REQUEST_URI"] != "/auth.php?page=login.php")
+    header("Location: /auth.php?page=login.php");
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +41,7 @@
                 <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" name="submit" value="login">Sign in</button>
               </form>
               <hr>
-              Don't have an account? <a href="/register.php">Sign up</a>
+              Don't have an account? <a href="/auth.php?page=register.php">Sign up</a>
             </div>
           </div>
         </div>
