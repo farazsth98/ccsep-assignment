@@ -1,8 +1,9 @@
 <?php
 	require_once("db.php");
 
-  session_start();
+  	session_start();
 
+  	// If a session is already established, redirect to the index page
 	if(isset($_SESSION["id"]))
 	{
 		header("Location: /index.php");
@@ -21,18 +22,13 @@
 			$username = urldecode($_POST["username"]);
 			$password = urldecode($_POST["password"]);
 
-			// PreparedStatements used so no SQL injection here
+			// Query the database
 			$stmt = mysqli_prepare($db,"SELECT id, username, password, locked FROM Users WHERE username=?");
 			mysqli_stmt_bind_param($stmt, "s", $username);
 			mysqli_stmt_execute($stmt);
-
-			// Fetch the results
 			mysqli_stmt_bind_result($stmt, $db_id, $db_username, $db_password, $db_locked);
 			mysqli_stmt_fetch($stmt);
-
-			// Get the number of rows returned
 			mysqli_stmt_store_result($stmt);
-			$num_rows = mysqli_stmt_num_rows($stmt);
 
 			// Make sure the username and password returned by the db aren't empty
 			if (empty($db_username) || empty($db_password))
@@ -45,7 +41,7 @@
 				if (md5($password) == $db_password)
 				{
 					// Check if the account is locked
-				  if ($db_locked == "false")
+				  	if ($db_locked == "false")
 					{
 						$_SESSION["id"] = $db_id;
 						header("Location: /index.php");

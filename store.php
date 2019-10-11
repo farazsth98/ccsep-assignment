@@ -84,6 +84,7 @@ include("includes/handle_store.php");
 							$sql = "SELECT user_id, name, description, price, id FROM Items";
 
 						$result = mysqli_query($db, $sql);
+						echo mysqli_error($db);
 
 						while($row = mysqli_fetch_array($result))
 						{

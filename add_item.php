@@ -15,6 +15,7 @@ include("includes/handle_add_item.php");
 <body>
 	<?php include('includes/header.php'); ?>
 
+	<!-- Simple form to let a user put up an item for sale -->
 	<div class="container">
 		<hr>
 		<form class="form-signin" action="" method="POST">

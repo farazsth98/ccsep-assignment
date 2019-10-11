@@ -26,32 +26,32 @@ include("includes/handle_balance.php");
 	?>
 
 	<div class="container">
-	 <table class="table">
-			<!-- THIS IS THE TABLE HEADER (YES IT GETS BOLDED) -->
+		<!-- User data is shown in a table -->
+	 	<table class="table">
 			<thead>
-				 <th>Account ID</th>
-				 <th>Email</th>
-				 <th>Balance</th>
+				<th>Account ID</th>
+				<th>Email</th>
+				<th>Balance</th>
 			</thead>
 			<tbody>
-				 <?php
-						// Use the GET variable "id" to get the correct user information
-						$id = $_GET["id"];
-						$sql = "SELECT id, username, email, balance FROM Users where id=$id;";
+				<?php
+					// Use the GET variable "id" to get the correct user information
+					$id = $_GET["id"];
+					$sql = "SELECT id, username, email, balance FROM Users where id=$id;";
 
-						$result = mysqli_query($db, $sql);
-						echo mysqli_error($db);
+					$result = mysqli_query($db, $sql);
+					echo mysqli_error($db);
 
-						$row = mysqli_fetch_array($result);
+					$row = mysqli_fetch_array($result);
 
-						echo '<h1>Welcome back '.$row[1].'!</h1>';
-						echo "<tr>";
-						echo "<td>$row[0]</td>";
-						echo "<td>$row[2]</td>";
-						echo "<td>\$$row[3]</td>"
-				 ?>
+					echo '<h1>Welcome back '.$row[1].'!</h1>';
+					echo "<tr>";
+					echo "<td>$row[0]</td>"; // user id
+					echo "<td>$row[2]</td>"; // user email
+					echo "<td>\$$row[3]</td>" // user's balance
+				?>
 			</tbody>
-	 </table>
+	 	</table>
 	</div>
 
 	<div class="d-flex justify-content-center">

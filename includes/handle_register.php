@@ -1,10 +1,11 @@
 <?php
 	require_once("db.php");
 
-  session_start();
+  	session_start();
 
 	$error = "";
 
+	// If a session is already established, redirect to the index page
 	if (isset($_SESSION["id"]))
 	{
 		header("Location: /index.php");
@@ -17,6 +18,7 @@
 		$password = md5($_POST["password"]);
 		$confirmpassword = md5($_POST["confirmpassword"]);
 
+		// Some sanity checks although Bootstrap shouldn't let any of these fields be empty
 		if (empty($username) || empty($email) || empty($password) || empty($confirmpassword))
 		{
 			$error = "Please fill out the form completely.";
@@ -27,12 +29,13 @@
 		}
 		else
 		{
-			// Ensure the username isn't a duplicate
+			// First we must ensure the username isn't a duplicate
 			$stmt = mysqli_prepare($db, "SELECT * FROM Users WHERE username=?;");
 			mysqli_stmt_bind_param($stmt, "s", $username);
 			mysqli_stmt_execute($stmt);
 			mysqli_stmt_store_result($stmt);
-
+			
+			// If the number of rows returned by the query is 0, we can proceed
 			$num_rows = mysqli_stmt_num_rows($stmt);
 			mysqli_stmt_close($stmt);
 
@@ -44,13 +47,14 @@
 				mysqli_stmt_execute($stmt);
 				mysqli_stmt_store_result($stmt);
 
+				// If the number of rows returned by the query is 0, we can proceed
 				$num_rows = mysqli_stmt_num_rows($stmt);
 				mysqli_stmt_close($stmt);
 
 				// Ensure the user doesn't already exist
 				if ($num_rows == 0)
 				{
-					// Get the max id
+					// Get the highest id in the database
 					$stmt = mysqli_prepare($db,"SELECT MAX(id) FROM Users");
 					mysqli_stmt_bind_param($stmt, "s", $username);
 					mysqli_stmt_execute($stmt);
@@ -58,7 +62,7 @@
 					mysqli_stmt_fetch($stmt);
 					mysqli_stmt_close($stmt);
 
-					// Add one to it to get a new ID
+					// Add one to it to get a new highest id
 					$db_id += 1;
 
 					// Insert this new user as a row in the Users table

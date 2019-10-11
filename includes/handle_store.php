@@ -20,8 +20,6 @@
 		$price = $_POST["price"];
 		$buyer_id = $_SESSION["id"];
 
-		echo $owner_id;
-
 		// Ensure the buyer isn't the same as the owner
 		if ($owner_id == $buyer_id)
 			$error = "You cannot buy your own items.";
@@ -42,12 +40,16 @@
 			else
 			{
 				// Subtract the money from the buyer's account
-				$stmt = "UPDATE Users SET balance = balance - $price WHERE id=$buyer_id;";
-				mysqli_query($db, $stmt);
+				$stmt = mysqli_prepare($db, "UPDATE Users SET balance = balance - ? WHERE id=?;");
+				mysqli_stmt_bind_param($stmt, "ii", $price, $buyer_id);
+				mysqli_stmt_execute($stmt);
+				mysqli_stmt_close($stmt);
 
 				// Add the money to the seller's account
-				$stmt = "UPDATE Users SET balance = balance + $price WHERE id=$owner_id;";
-				mysqli_query($db, $stmt);
+				$stmt = mysqli_prepare($db, "UPDATE Users SET balance = balance + ? WHERE id=?;");
+				mysqli_stmt_bind_param($stmt, "ii", $price, $owner_id);
+				mysqli_stmt_execute($stmt);
+				mysqli_stmt_close($stmt);
 
 				// Delete the item to emulate "buying"
 				$stmt = mysqli_prepare($db, "DELETE FROM Items WHERE id=?;");
