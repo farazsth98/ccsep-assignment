@@ -7,7 +7,7 @@
 		$id = $_SESSION["id"];
 
 		// Add the balance
-		$stmt = "UPDATE Users SET balance=balance + $balance WHERE id=$id;";
+		$stmt = "UPDATE Users SET balance = balance + $balance WHERE id=$id;";
 		mysqli_query($db, $stmt);
 
 		header("Location: /account.php");

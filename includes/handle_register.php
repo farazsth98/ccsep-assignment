@@ -47,6 +47,7 @@
 				$num_rows = mysqli_stmt_num_rows($stmt);
 				mysqli_stmt_close($stmt);
 
+				// Ensure the user doesn't already exist
 				if ($num_rows == 0)
 				{
 					// Get the max id
