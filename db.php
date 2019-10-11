@@ -10,6 +10,8 @@
  * Purpose:
 */
 
+// Credits to Jonathon for providing this file
+
 // Set constants for the database connection
 
 include("/includes/check_session.php");
