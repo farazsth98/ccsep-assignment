@@ -10,14 +10,17 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item <?php if($current == "account.php") echo "active"; ?> ">
+      <li class="nav-item">
         <a class="nav-link" href="/account.php">Account</a>
       </li>
-			<li class="nav-item <?php if($current == "user_items.php") echo "active"; ?> ">
+			<li class="nav-item">
         <a class="nav-link" href="/your_items.php">Your items</a>
       </li>
-			<li class="nav-item <?php if($current == "store.php") echo "active"; ?> ">
+			<li class="nav-item">
         <a class="nav-link" href="/store.php">Store</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add_item.php">Add Item</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout.php">Logout</a>

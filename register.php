@@ -1,10 +1,12 @@
 <?php
   include("includes/handle_register.php");
 
-  if ($_SERVER["REQUEST_URI"] != "/auth.php?page=register.php")
-    header("Location: /auth.php?page=register.php");
+  # Auto redirect if a get request on auth.php isn't used to access the login page
+  	if ($_SERVER["REQUEST_URI"] != "/auth.php?page=register.php")
+    	header("Location: /auth.php?page=register.php");
 ?>
 
+<!-- Adapted from the following link: https://startbootstrap.com/snippets/registration-page/ -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,7 +20,6 @@
 				<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
 					<div class="card card-signin flex-row my-5">
 						<div class="card-img-left d-none d-md-flex">
-							 <!-- Background image for card set in CSS! -->
 						</div>
 						<div class="card-body">
 							<h5 class="card-title text-center">Register</h5>
