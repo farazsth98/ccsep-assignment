@@ -1,7 +1,22 @@
 <?php
+/*
+ * File: handle_store.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page handles POST requests made to
+ *			store.php, meaning it handles any request
+ *			a user makes to buy an item, or any request
+ *			that the admin makes to remove an item from the
+ *			store.
+*/
+
 	require_once("db.php");
 
-	// When admin chooses to delete an item
+	// When the admin chooses to delete an item
 	if (isset($_POST["delete"]))
 	{
 		$item = $_POST["id"];

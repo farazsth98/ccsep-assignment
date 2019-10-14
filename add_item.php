@@ -1,4 +1,15 @@
 <?php
+/*
+ * File: add_item.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: Lets a user put up items for sale.
+*/
+
 require_once("db.php");
 require_once("includes/check_session.php");
 

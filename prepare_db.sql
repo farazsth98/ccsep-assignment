@@ -20,7 +20,10 @@ CREATE TABLE IF NOT EXISTS Items (
 	price FLOAT(6) UNSIGNED NOT NULL
 );
 
-INSERT INTO Users VALUES (1, 'admin', 'a2ce9ec5c4696a657e469b177826df2f', 'admin@assignment.com', 'false', 0.0);
+INSERT INTO Users VALUES (1, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'admin@assignment.com', 'false', 0.0);
 INSERT INTO Users VALUES (2, 'locked_user', '5f4dcc3b5aa765d61d8327deb882cf99', 'locked@user.com', 'true', 0.0);
+INSERT INTO Users VALUES(3, 'normal_user', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal@user.com', 'false', 0.0);
+INSERT INTO Users VALUES(4, 'delete_test_user', '5f4dcc3b5aa765d61d8327deb882cf99', 'delete@test.com', 'false', 0.0);
 
-INSERT INTO Items VALUES (1, 1, 'test item', 'Just testing things out here', 9999.0);
+INSERT INTO Items VALUES (1, 3, 'test item', 'Just testing things out here', 9999.0);
+INSERT INTO Items VALUES(2, 3, 'another test item', 'testing some stuff', 10000.0);

@@ -1,4 +1,18 @@
 <?php
+/*
+ * File: handle_login.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page handles POST requests made to the
+ *			login.php page. Specifically, it will create
+ *	1		a session for a user provided they provide
+ *			valid details for a successful login.
+*/
+
 	require_once("db.php");
 
   	session_start();
@@ -13,6 +27,7 @@
 
 	if (isset($_POST["submit"]))
 	{
+		// Sanity checks
 		if (empty($_POST["username"]) || empty($_POST["password"]))
 		{
 			$error = "Invalid username or password.";
@@ -22,7 +37,7 @@
 			$username = urldecode($_POST["username"]);
 			$password = urldecode($_POST["password"]);
 
-			// Query the database
+			// Query the database for this user
 			$stmt = mysqli_prepare($db,"SELECT id, username, password, locked FROM Users WHERE username=?");
 			mysqli_stmt_bind_param($stmt, "s", $username);
 			mysqli_stmt_execute($stmt);
@@ -37,10 +52,10 @@
 			}
 			else
 			{
-				// Compare passwords
+				// Hash the password and compare it to the stored hash in the database
 				if (md5($password) == $db_password)
 				{
-					// Check if the account is locked
+					// Make sure the account isn't locked
 				  	if ($db_locked == "false")
 					{
 						$_SESSION["id"] = $db_id;

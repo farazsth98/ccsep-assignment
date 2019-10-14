@@ -1,3 +1,18 @@
+<?php
+/*
+ * File: header.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page is included in every other page except
+ *          db.php, login.php, register.php, and auth.php.
+ *          It simply outputs the navbar for the website.
+*/
+?>
+
 
 <!-- This navigation bar has been adapted from the bootstrap documentation found here:
      https://getbootstrap.com/docs/4.0/components/navbar/ -->
@@ -26,6 +41,7 @@
         <a class="nav-link" href="/logout.php">Logout</a>
       </li>
       <?php
+        // Only add the admin panel button if the user logged in is the admin
         if ($_SESSION["id"] == 1) echo '
         <li class="nav-item">
           <a class="nav-link" href="/admin.php">Admin Panel</a>

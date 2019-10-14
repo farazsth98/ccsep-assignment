@@ -1,17 +1,29 @@
 <?php
+/*
+ * File: login.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page gets included by auth.php.
+ *          It let's the user login to the store.
+*/
+
     include("includes/handle_login.php");
 
-  # Auto redirect if a get request on auth.php isn't used to access the login page
+    // Auto redirect if a GET request on auth.php isn't used to access the login page
     if ($_SERVER["REQUEST_URI"] != "/auth.php?page=login.php")
         header("Location: /auth.php?page=login.php");
 ?>
 
-<!-- Adapted from the following link: https://startbootstrap.com/snippets/login/ -->
+<!-- Just a nice looking login page.
+     Adapted from the following link: https://startbootstrap.com/snippets/login/ -->
 <!DOCTYPE html>
 <html>
     <head>
         <?php include_once("includes/includes.php"); ?>
-        <title>House of Faith - Login</title>
     </head>
 
 <body>

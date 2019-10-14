@@ -1,4 +1,17 @@
 <?php
+/*
+ * File: handle_balance.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page handles POST requests made to
+ *			account.php, specifically when the user
+ *			chooses to add more money to their account.
+*/
+
 	require_once("db.php");
 
 	// Check if a POST request was made to increase the balance

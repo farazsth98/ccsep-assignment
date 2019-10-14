@@ -1,4 +1,18 @@
 <?php
+/*
+ * File: handle_admin.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page handles POST requests made to the
+ *			admin.php page. The POST requests can be one of
+ *			the following three: to lock an account, to
+ *			unlock an account, or to delete an account.
+*/
+
 	// If a post request was made to lock the account
 	if (isset($_POST["lock"]))
 	{

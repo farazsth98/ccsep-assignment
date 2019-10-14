@@ -1,4 +1,18 @@
 <?php
+/*
+ * File: handle_register.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page handles POST requests made to
+ *			register.php, meaning it essentially handles
+ *			user account creation (and any error checking
+ *			that follows).
+*/
+
 	require_once("db.php");
 
   	session_start();

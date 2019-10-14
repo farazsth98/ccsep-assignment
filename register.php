@@ -1,17 +1,30 @@
 <?php
-  include("includes/handle_register.php");
+/*
+ * File: register.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This page gets included by auth.php.
+ *          It let's the user register an account 
+ *			to access the store.
+*/
 
-  # Auto redirect if a get request on auth.php isn't used to access the login page
+  	include("includes/handle_register.php");
+
+    // Auto redirect if a get request on auth.php isn't used to access the login page
   	if ($_SERVER["REQUEST_URI"] != "/auth.php?page=register.php")
     	header("Location: /auth.php?page=register.php");
 ?>
 
-<!-- Adapted from the following link: https://startbootstrap.com/snippets/registration-page/ -->
+<!-- A nice looking register page.
+	 Adapted from the following link: https://startbootstrap.com/snippets/registration-page/ -->
 <!DOCTYPE html>
 <html>
 	<head>
   	<?php include_once("includes/includes.php"); ?>
-		<title>House of Faith - Register</title>
   </head>
 
   <body>

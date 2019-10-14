@@ -1,4 +1,18 @@
 <?php
+/*
+ * File: store.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: The store page. It provides a list
+ *			of items for the user to view. The
+ *			user can also search by item name and
+ *			by seller name.
+*/
+
 require_once("db.php");
 require_once("includes/check_session.php");
 
@@ -11,7 +25,6 @@ include("includes/handle_store.php");
 
 		<?php
 			include_once("includes/includes.php");
-			$current = "store.php";
 		?>
 
 	</head>
@@ -46,7 +59,10 @@ include("includes/handle_store.php");
 			<hr>
 
 			<?php
+				// For when a user tries to purchase an item without having enough money,
+				// or for when they try to purchase one of their own items.
 				echo "<b>$error</b>";
+
 				if (isset($_GET["itemName"]))
 					echo '<h2> Searching for item ' . $_GET["itemName"] . ':</h2>';
 				else if (isset($_GET["sellerName"]))
@@ -69,6 +85,8 @@ include("includes/handle_store.php");
 				</thead>
 				<tbody>
 					<?php
+						// Check if a GET request was made to search for an item or a seller,
+						// and query the database accordingly
 						if(isset($_GET["itemName"]))
 						{
 							$name = $_GET["itemName"];
@@ -86,9 +104,10 @@ include("includes/handle_store.php");
 						$result = mysqli_query($db, $sql);
 						echo mysqli_error($db);
 
+						// Print out each item from the query above
 						while($row = mysqli_fetch_array($result))
 						{
-							// Get the owner of each item
+							// Get the owner of each item using the user_id
 							$sql = "SELECT username FROM Users WHERE id=$row[0]";
 							$owner = mysqli_fetch_array(mysqli_query($db, $sql))[0];
 

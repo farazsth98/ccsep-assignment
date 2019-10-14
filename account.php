@@ -1,4 +1,19 @@
 <?php
+/*
+ * File: account.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: This is the user's account page, only
+ *			to be visible to the user that is
+ *			currently logged in. It displays the
+ *			user's account ID and email, and lets
+ *			the user add money to their account.
+*/
+
 require_once("db.php");
 require_once("includes/check_session.php");
 include("includes/handle_balance.php");

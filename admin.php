@@ -1,4 +1,18 @@
 <?php
+/*
+ * File: admin.php
+ * File Created: Monday, 30th September 2019
+ * Author: Syed Faraz Abrar
+ * -----
+ * Last Modified: Monday, 14th October 2019
+ * Modified By: Syed Faraz Abrar
+ * -----
+ * Purpose: The admin panel, only accessible to
+ * 			the administrative user. They can then
+ *			lock or unlock user accounts, as well as
+ *			delete them completely.
+*/
+
 require_once("db.php");
 require_once("includes/check_session.php");
 include("includes/handle_admin.php");
@@ -27,24 +41,24 @@ session_start();
 
 		<div class="container">
 		 	<!-- Mad props to Jon for providing a table for us to use ^_^ -->
+		 	<!-- Search prompt for letting the admin search for a user by name -->
 		 	<h1>Search for users:</h1>
-		 	<!-- Send the form as a GET request to this page (look at the URL) -->
 		 	<form method="GET" action="./admin.php">
 				<div class="input-group mt-2 w-25">
 					<input type="text" class="form-control" placeholder="Name to search by" name="name" >
 					<div class="input-group-append">
-						<!-- type=submit will trigger the form -->
 						<button class="btn btn-outline-secondary" type="submit" id="searchButton">Search</button>
 					</div>
 				</div>
 		 	</form>
 
-		 	<!-- Draw a horizontal line :) -->
 		 	<hr>
+
+		 	<!-- Draw a table of users for the admin to view, and also
+				 have some fancy buttons to let the admin lock, unlock,
+		 		 and delete user accounts -->
 		 	<h2>Results Found:</h2>
-		 	<!-- Lets create a table -->
 		 	<table class="table">
-				<!-- THIS IS THE TABLE HEADER (YES IT GETS BOLDED) -->
 				<thead>
 					<th>ID</th>
 					<th>Name</th>
@@ -56,7 +70,7 @@ session_start();
 				</thead>
 				<tbody>
 					<?php
-						// If the GET variable "name" is set then use it
+						// If the GET variable "name" is set then use it to query for a specific user
 						if(isset($_GET["name"]))
 						{
 							 $name = $_GET["name"];
@@ -64,13 +78,13 @@ session_start();
 						}
 						else
 						{
-							 // Otherwise just grab them all
+							 // Otherwise just query for all users
 							 $sql = "SELECT id, username, email, locked FROM Users";
 						}
 
 						$result = mysqli_query($db, $sql);
 
-						// Iterate through all results and create a list item
+						// Iterate through all results and output a list of users
 						while($row = mysqli_fetch_array($result))
 						{
 							echo "<tr>";
@@ -78,7 +92,7 @@ session_start();
 							echo "<td>$row[1]</td>";
 							echo "<td>$row[2]</td>";
 							echo "<td>$row[3]</td>";
-							 // Add two buttons that act as lock and unlock buttons for each account
+							// Add two buttons that act as lock and unlock buttons for each account
 							echo "<td>";
 							 	echo'<form action="" method="post">';
 									echo '<input type="hidden" name="id" value="'.$row[0].'"/>';
@@ -91,6 +105,8 @@ session_start();
 							 		echo '<button name="unlock" type="submit" value="unlock" class="btn btn-success"><i class="fas fa-check"></button></i>';
 						 		echo'</form>';
 							echo "</td>";
+
+							// Add a button that lets the admin delete user accounts
 							echo "<td>";
 						 		echo'<form action="" method="post">';
 									echo '<input type="hidden" name="id" value="'.$row[0].'"/>';
