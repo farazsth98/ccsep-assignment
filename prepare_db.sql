@@ -25,5 +25,5 @@ INSERT INTO Users VALUES (2, 'locked_user', '5f4dcc3b5aa765d61d8327deb882cf99', 
 INSERT INTO Users VALUES(3, 'normal_user', '5f4dcc3b5aa765d61d8327deb882cf99', 'normal@user.com', 'false', 0.0);
 INSERT INTO Users VALUES(4, 'delete_test_user', '5f4dcc3b5aa765d61d8327deb882cf99', 'delete@test.com', 'false', 0.0);
 
-INSERT INTO Items VALUES (1, 3, 'test item', 'Just testing things out here', 9999.0);
-INSERT INTO Items VALUES(2, 3, 'another test item', 'testing some stuff', 10000.0);
+INSERT INTO Items VALUES (1, 3, 'Orange', 'Very sweet', 9999.0);
+INSERT INTO Items VALUES(2, 3, 'My Grandma\'s knitting tools', 'testing some stuff', 10000.0);
